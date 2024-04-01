@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    font-family: 'poppins', sans-serif;
+    background-color: #EFF0F1;
+    
+}
+
+/* Hide scrollbar for webkit browsers */
+::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for Firefox */
+  scrollbar-width: none;
