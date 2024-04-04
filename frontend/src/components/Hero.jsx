@@ -12,7 +12,10 @@ function Hero() {
         <h3 className="py-8 text-4xl">Your Source for Better Learning</h3>
         <p className="text-lg w-[80%] pb-6 pl-2 tracking-widest">We are a publishing company that publishes books, Modules and workbooks. We also have affiliate companies including Merryland Publishing Corporation, Jedigar Enterprises and B2G2 Enterprises</p>
         <NavLink to="/books" >
-        <button className="bg-primary-txt hover:scale-105 ease-in duration-100 text-white font-bold py-3 px-14 rounded-md shadow-md ">Explore Collection</button>
+        <button className="bg-primary-txt text-white font-bold py-3 px-14 rounded-md shadow-md hover:scale-110 hover:bg-opacity-80 transition-transform duration-300 ease-in-out">
+          Explore Collection
+        </button>
+
         </NavLink>
       </div>
       <div className="w-[45%]">

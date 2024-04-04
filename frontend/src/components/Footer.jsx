@@ -9,6 +9,10 @@ function Footer() {
 
     const currentYear = new Date().getFullYear();
     
+    const handleClickTop= () =>{
+      window.scrollTo(0, 0);  
+      console.log('clicked')
+     }
 
     return (
         <footer className="flex flex-col bg-footer-bg bg-opacity-80 py-8 mt-auto">
@@ -38,9 +42,9 @@ function Footer() {
             <div className='w-[50%]'>
                 <h1 className='font-semibold text-xl py-8'>Quick Links</h1>
                 <ul className='flex flex-col gap-2 text-md'>
-                    <li className='cursor-pointer hover:underline underline-offset-1'><NavLink to='/'>Home</NavLink></li>
-                    <li className='cursor-pointer hover:underline underline-offset-1'><NavLink to='/books'>Explore Books</NavLink></li>
-                    <li className='cursor-pointer hover:underline underline-offset-1'><NavLink to='/contact'>Contact Us</NavLink></li>
+                    <li className='cursor-pointer hover:underline underline-offset-1' onClick={handleClickTop}><NavLink to='/'>Home</NavLink></li>
+                    <li className='cursor-pointer hover:underline underline-offset-1' onClick={handleClickTop}><NavLink to='/books'>Explore Books</NavLink></li>
+                    <li className='cursor-pointer hover:underline underline-offset-1' onClick={handleClickTop}><NavLink to='/contact'>Contact Us</NavLink></li>
                 </ul>
             </div>
             <div className='w-full p-5'>
@@ -55,7 +59,7 @@ function Footer() {
             </div>
         </div>
         </div>
-        <p className="text-center font-extralight text-sm text-gray-400">© {currentYear} XYZ Company. All Rights Reserved.</p>
+        <p className="text-center font-extralight text-sm text-gray-400">© {currentYear} Garcia Group of Company. All Rights Reserved.</p>
         </footer>
     );
 }

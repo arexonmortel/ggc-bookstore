@@ -1,8 +1,12 @@
 // Navigation.js
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import logo from '../assets/ggc-logo.png'
+import { IoPerson } from "react-icons/io5";
+
+
 
 
 const Navigation = () => {
@@ -10,6 +14,14 @@ const Navigation = () => {
   const [isOpenAbout, setIsOpenAbout] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  const ulRef = useRef(null);
+
+  
+
+const handleClickTop= () =>{
+ window.scrollTo(0, 0);  
+ console.log('clicked')
+}
 
   const toggleAffiliate = () => {
     setIsOpenAffiliate(!isOpenAffiliate);
@@ -44,110 +56,139 @@ const Navigation = () => {
   }, []);
 
 
+  const handleClickOutside = (event) => {
+    if (ulRef.current && !ulRef.current.contains(event.target)) {
+      setIsOpenAbout(false);
+      setIsOpenAffiliate(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+
+
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+
   return (
     <nav className={`bg-primary-bg p-4 font-primary drop-shadow-xl z-10 sticky top-0 w-full ${isSticky ? 'sticky top-0 ' : ''}`}>
       <div className="container mx-auto flex justify-between items-center ">
 
         {/* Logo */}
         <div className="flex items-center ">
-          <NavLink to="/" className="text-primary-txt text-xl font-medium flex justify-center items-center">
-            <img src={logo} alt="ggc-logo"  className='w-16'/> <p className='font-semibold'> GGC Bookstore </p>
+          <NavLink to="/" className=" text-xl font-medium flex justify-center items-center" onClick={handleClickTop}>
+            <img src={logo} alt="ggc-logo"  className='w-16'/> <p className='font-semibold text-primary-txt'> GGC Bookstore </p>
           </NavLink>
         </div>
 
         {/* Desktop Menu */}
         <div className="w-1/2  hidden md:flex">
-          <ul className="flex items-center w-full justify-between text-nowrap">
-            <li className=" p-3 hover:underline underline-offset-4 decoration-[#9090a3]">
-              <NavLink to="/"
-              className="text-primary-txt hover:text-footer-bg font-medium text-lg p-7 "
+          <ul className="flex items-center w-full justify-around text-nowrap pl-14 px-5">
+            <li className=" p-3 hover:underline underline-offset-4 decoration-[#9090a3]" onClick={handleClickTop}>
+              <NavLink activeClassName = "active" to="/"
+              className="text-primary-txt font-medium text-lg p-7 "
               onClick={handleClick}>
                 Home
               </NavLink>
             </li>
-            <li className="relative p-7 hover:underline underline-offset-4 decoration-[#9090a3] text-primary-txt font-medium text-lg focus:outline-none cursor-pointer"
-             onClick={toggleAbout}>
-              About
-              {isOpenAbout && (
-                <ul className="absolute mt-2 bg-white rounded-xl w-52 shadow-md ml-[-5rem] overflow-hidden z-50">
-                  <li className=" hover:bg-[#C5C5D4] p-3 text-nowrap "
-                      onClick={ () => setIsOpenAbout(false)}>
-                    <NavLink
-                      to="/about"
-                      className="text-primary-txt font-light font-sm  py-3 "
-                    >
-                      Merryland Publishing
-                    </NavLink>
-                  </li>
-                  <li className=" hover:bg-[#C5C5D4] p-3"
-                  onClick={ () => setIsOpenAbout(false)}>
-                    <NavLink
-                      to="/about"
-                      className="text-primary-txt font-light font-sm py-3"
-                    >
-                      Jedigar Enterprises
-                    </NavLink>
-                  </li>
-                  <li className='hover:bg-[#C5C5D4] p-3'
-                  onClick={ () => setIsOpenAbout(false)}>
-                    <NavLink
-                      to="/about"
-                      className="text-primary-txt font-light font-sm py-3"
-                    >
-                      B2G2 Enterprises
-                    </NavLink>
-                  </li>
-                </ul>
-              )}
-            </li>
+            <li
+      className="relative p-7 hover:underline underline-offset-4 decoration-[#9090a3] text-primary-txt font-medium text-lg focus:outline-none cursor-pointer"
+      onClick={toggleAbout}
+    >
+        About
+      {isOpenAbout && (
+        <ul
+          className="absolute mt-2 bg-white rounded-xl w-52 shadow-md ml-[-5rem] overflow-hidden z-50"
+          ref={ulRef}
+        >
+          <li
+            className="hover:bg-[#C5C5D4] p-3 text-nowrap"
+            onClick={() => {
+              setIsOpenAbout(false);
+              handleClickTop();
+            }}
+          >
+            <NavLink to="/about/merryland" activeClassName ="active" className="text-primary-txt font-light font-sm py-3">
+              Merryland Corp.
+            </NavLink>
+          </li>
+          <li
+            className="hover:bg-[#C5C5D4] p-3"
+            onClick={() => {
+              setIsOpenAbout(false);
+              handleClickTop();
+            }}
+          >
+            <NavLink to="/about/Jedigar" activeClassName ="sub-active" className="text-primary-txt font-light font-sm py-3">
+              Jedigar Enterprises
+            </NavLink>
+          </li>
+          <li
+            className="hover:bg-[#C5C5D4] p-3"
+            onClick={() => {
+              setIsOpenAbout(false);
+              handleClickTop();
+            }}
+          >
+            <NavLink to="/about/b2g2" activeClassName ="sub-active" className="text-primary-txt font-light font-sm py-3">
+              B2G2 Enterprises
+            </NavLink>
+          </li>
+        </ul>
+      )}
+    </li>
             <li className="p-3 hover:underline underline-offset-4 decoration-[#9090a3]"
-            onClick={handleClick}>
-              <NavLink to="/books" className="text-primary-txt font-medium text-lg p-7">
+            onClick={()=> {handleClick; handleClickTop()}}>
+              <NavLink activeClassName = "active" to="/books" className="text-primary-txt font-medium text-lg p-7">
                 Books
               </NavLink>
             </li>
-            <li className="relative p-7 hover:underline underline-offset-4 decoration-[#9090a3] text-primary-txt font-medium text-lg focus:outline-none cursor-pointer"
-              onClick={toggleAffiliate}>
-                Affiliate
-             
-              {isOpenAffiliate && (
-                <ul className="absolute mt-2 bg-white rounded-xl w-52 shadow-md ml-[-4rem] overflow-hidden transition duration-300 ease-in-out">
-                <li className=" hover:bg-[#C5C5D4] p-3 text-nowrap"
-                    onClick={ () => setIsOpenAbout(false)}>
-                  <NavLink
-                    to="/affiliate"
-                    className="text-primary-txt font-light font-sm py-3"
-                  >
-                    Merryland Publishing
-                  </NavLink>
-                </li>
-                <li className=" hover:bg-[#C5C5D4] p-3"
-                onClick={ () => setIsOpenAbout(false)}>
-                  <NavLink
-                    to="/affiliate"
-                    className="text-primary-txt font-light font-sm py-3"
-                  >
-                    Jedigar Enterprises
-                  </NavLink>
-                </li>
-                <li className='hover:bg-[#C5C5D4] p-3'
-                onClick={ () => setIsOpenAbout(false)}>
-                  <NavLink
-                    to="/affiliate"
-                    className="text-primary-txt font-light font-sm py-3"
-                  >
-                    B2G2 Enterprises
-                  </NavLink>
-                </li>
-              </ul>
-              )}
-            </li>
+{/*             <li className="relative p-7 hover:underline underline-offset-4 decoration-[#9090a3] text-primary-txt font-medium text-lg focus:outline-none cursor-pointer" onClick={toggleAffiliate}>
+      Affiliate
+      {isOpenAffiliate && (
+        <ul className="absolute mt-2 bg-white rounded-xl w-52 shadow-md ml-[-4rem] overflow-hidden transition duration-300 ease-in-out" ref={ulRef}>
+          <li className="hover:bg-[#C5C5D4] p-3 text-nowrap" onClick={() => { setIsOpenAffiliate(false); handleClickTop(); }}>
+            <NavLink to="/books" activeClassName="active" className="text-primary-txt font-light font-sm py-3">
+              Merryland Publishing
+            </NavLink>
+          </li>
+          <li className="hover:bg-[#C5C5D4] p-3" onClick={() => { setIsOpenAffiliate(false); handleClickTop(); }}>
+            <NavLink to="/books" activeClassName="sub-active active" className="text-primary-txt font-light font-sm py-3">
+              Jedigar Enterprises
+            </NavLink>
+          </li>
+          <li className="hover:bg-[#C5C5D4] p-3" onClick={() => { setIsOpenAffiliate(false); handleClickTop(); }}>
+            <NavLink to="/books" activeClassName="sub-active active" className="text-primary-txt font-light font-sm py-3">
+              B2G2 Enterprises
+            </NavLink>
+          </li>
+        </ul>
+      )}
+    </li> */}
             <li className="p-3 hover:underline underline-offset-4 decoration-[#9090a3]"
-            onClick={handleClick}>
-              <NavLink to="/contact" className="text-primary-txt font-medium text-lg p-7">
+            onClick={()=> {handleClick; handleClickTop()}}>
+              <NavLink activeClassName = "active" to="/contact" className="text-primary-txt font-medium text-lg p-7">
                 Contact Us
               </NavLink>
             </li>
+            <NavLink
+                  to="/"
+                  className="text-primary-txt font-medium text-lg"
+
+                >
+                  <IoPerson className="text-primary-txt font-medium text-xl" />
+                </NavLink>
           </ul>
         </div>
 
@@ -235,6 +276,8 @@ const Navigation = () => {
                 >
                   Contact Us
                 </NavLink>
+              </li>
+              <li>
               </li>
             </ul>
           </div>
