@@ -2,6 +2,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import heroImage from "../assets/hero-img.svg";
+import KidsStudying from "../assets/kids-studying.jpg";
+import kidsClassroom from "../assets/kids-classroom.jpg";
 
 
 function Hero() {

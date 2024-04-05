@@ -1,13 +1,106 @@
- 
- function BooksDisplay({books}) {
-    return (
-      <div>
-        <h2 className="text-2xl font-semibold  text-primary-txt pl-6">Highlight Books</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 p-6">
+import React, { useState } from 'react';
+import { FiPlus, FiMinus,  FiX  } from 'react-icons/fi'; 
+
+function BooksDisplay({ books }) {
+  const [selectedBook, setSelectedBook] = useState(null);
+  const [numOfCopies, setNumOfCopies] = useState(1);
+
+  const handleBookClick = (book) => {
+    setSelectedBook(book);
+    setNumOfCopies(1)
+  };
+  const handleClickTop= () =>{
+    window.scrollTo(0, 0);  
+    console.log('clicked')
+   }
+   
+
+  const handleBuyBook = () => {
+    // Implement buy book functionality here
+    // You can use the selectedBook and numOfCopies states to process the purchase
+  };
+
+  const increment = () => {
+    if (numOfCopies < selectedBook.availability) {
+      setNumOfCopies(numOfCopies + 1);
+    }
+  };
+
+  const decrement = () => {
+    if (numOfCopies > 1) {
+      setNumOfCopies(numOfCopies - 1);
+    }
+  };
+  const handleClose = () => {
+    setSelectedBook(null); // Reset selectedBook to null
+  };
+
+  return (
+    <div>
+      {selectedBook && (
+        <div className='relative'>
+              <button onClick={handleClose} className="absolute top-[5%] right-[20%]  p-2 bg-191847 text-white rounded-full focus:outline-none">
+        <FiX className='text-primary-txt text-opacity-55 text-3xl hover:text-red-500' />
+      </button>
+          <div className="flex flex-col items-center justify-center ">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 p-6">
+          <div className="flex justify-center items-center ">
+              <img src={selectedBook.imageSrc} alt={selectedBook.title} className="w-64 h-80 object-cover rounded-lg shadow-2xl drop-shadow-2xl" />
+            </div>
+            <div className="flex flex-col justify-center">
+              <p className={`text-white px-2 w-max rounded-xl text-sm mb-2 ${selectedBook.availability ? 'bg-green-500': 'bg-red-500'}`}>{selectedBook.availability ? "Available": "Out of stock"}</p>
+              <h3 className="text-2xl text-primary-txt font-semibold mb-6">{selectedBook.title}</h3>
+              <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Author:</span> {selectedBook.author}</p>
+              <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Published:</span> {selectedBook.pubYear}</p>
+              <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Genre:</span> {selectedBook.genre}</p>
+              <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Approved:</span> {selectedBook.approvedBy}</p>
+              <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Education Level:</span> {selectedBook.eduLevel}</p>
+              <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Size:</span> {selectedBook.bookSize}</p>
+              <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Pages:</span> {selectedBook.pages}</p>
+              <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Stocks left:</span> {selectedBook.availability}</p>
+              <div className='flex items-center gap-6'>
+                <p>Quantity:</p>
+              <div className="flex items-center mb-6 mt-6 justify-between">
+                 <button onClick={decrement} className={`${numOfCopies == 1 ? "opacity-30": "opacity-100"} border border-primary-txt border-opacity-50 hover:border-opacity-0  rounded-full px-2 py-2 hover:bg-primary-txt hover:bg-opacity-30 focus:outline-none`}>
+                   <FiMinus />
+                 </button>
+                 <span className="mx-4 text-gray-600">{numOfCopies}</span>
+                 <button onClick={increment} className="border border-primary-txt border-opacity-50 hover:border-opacity-0  rounded-full px-2 py-2 hover:bg-primary-txt hover:bg-opacity-30 focus:outline-none">
+                   <FiPlus />
+                 </button>
+               </div>
+               </div>
+               <div className='flex items-center justify-between gap-2'>
+               <button
+                onClick={handleBuyBook}
+                className="bg-primary-txt text-white px-14 py-2 rounded-md hover:bg-opacity-80"
+                disabled={selectedBook.availability < numOfCopies}
+              >
+                Buy Now
+              </button>
+              <button
+                onClick={handleBuyBook}
+                className="bg-[#002366] text-white px-16 py-2 rounded-md hover:bg-opacity-80"
+                disabled={selectedBook.availability < numOfCopies}
+              >
+                Inquire
+              </button>
+               </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      )}
+      <h2 className="text-2xl font-semibold text-primary-txt pl-6">Highlights Book</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 p-6">
         {books.map((book) => (
-          <div key={book._id} className="relative bg-white rounded-2xl shadow-md overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105">
-            <div className='flex justify-center items-center pt-5'>
-            <img src={book.imageSrc} alt={book.title} className="w-44 h-56 object-cover rounded-lg" />
+          <div
+            key={book._id}
+            className="relative bg-white rounded-2xl shadow-md overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105"
+            onClick={() => {handleBookClick(book); handleClickTop()}}
+          >
+            <div className="flex justify-center items-center pt-5">
+              <img src={book.imageSrc} alt={book.title} className="w-44 h-56 object-cover rounded-lg" />
             </div>
             <div className="p-4 flex flex-col items-center justify-center  text-center">
               <h3 className="text-lg text-primary-txt font-semibold mb-1">{book.title}</h3>
@@ -19,8 +112,8 @@
           </div>
         ))}
       </div>
-      </div>
-    )
- }
+    </div>
+  );
+}
 
- export default BooksDisplay
+export default BooksDisplay;
