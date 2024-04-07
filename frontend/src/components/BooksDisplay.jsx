@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { FiPlus, FiMinus,  FiX  } from 'react-icons/fi'; 
+import Select from 'react-select';
 
 function BooksDisplay({ books }) {
   const [selectedBook, setSelectedBook] = useState(null);
   const [numOfCopies, setNumOfCopies] = useState(1);
+  const [bookSize, setBookSize] = useState('');
+
 
   const handleBookClick = (book) => {
     setSelectedBook(book);
     setNumOfCopies(1)
+    console.log(book)
   };
   const handleClickTop= () =>{
     window.scrollTo(0, 0);  
@@ -35,15 +39,48 @@ function BooksDisplay({ books }) {
     setSelectedBook(null); // Reset selectedBook to null
   };
 
+  const handleSelectChange = (selectedOption) => {
+    setBookSize(selectedOption.value);
+  };
+
+
+  const options = [
+    { value: 'Small', label: 'Small' },
+    { value: 'Big', label: 'Big' },
+  ];
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      border: '2px solid #e2e8f0',
+      borderRadius: '0.375rem',
+      boxShadow: state.isFocused ? '0 0 0 1px rgba(25, 24, 71, 0.2)' : 'none',
+      color: '#191847',
+      fontWeight: '300',
+      '&:hover': {
+        borderColor: 'rgba(25, 24, 71, 0.2)',
+      },
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? '#191847' : 'white',
+      color: state.isSelected ? 'white' : '#4a5568',
+      
+      '&:hover': {
+        backgroundColor: 'rgba(25, 24, 71, 0.2)',
+        color: '#191847',
+      },
+    }),
+  };
+
   return (
     <div>
       {selectedBook && (
-        <div className='relative'>
-              <button onClick={handleClose} className="absolute top-[5%] right-[20%]  p-2 bg-191847 text-white rounded-full focus:outline-none">
+        <div className='relative overflow-hidden mx-[23rem]'>
+          <button onClick={handleClose} className="absolute top-8 right-0  p-2 bg-191847 text-white rounded-full focus:outline-none">
         <FiX className='text-primary-txt text-opacity-55 text-3xl hover:text-red-500' />
       </button>
-          <div className="flex flex-col items-center justify-center ">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 p-6">
+          <div className="flex flex-col items-center justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 p-6 rounded-3xl mt-8">
           <div className="flex justify-center items-center ">
               <img src={selectedBook.imageSrc} alt={selectedBook.title} className="w-64 h-80 object-cover rounded-lg shadow-2xl drop-shadow-2xl" />
             </div>
@@ -58,13 +95,25 @@ function BooksDisplay({ books }) {
               <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Size:</span> {selectedBook.bookSize}</p>
               <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Pages:</span> {selectedBook.pages}</p>
               <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Stocks left:</span> {selectedBook.availability}</p>
+              {selectedBook.publisher.toLowerCase() === "merryland publishing corp." && (
+                <div className='flex items-center gap-2 '>
+                      <p className='text-primary-txt font-semibold'>Select Size:</p>
+                        <Select
+                        className="rounded-lg outline-none w-[6.7rem]"
+                        options={options}
+                        onChange={handleSelectChange}
+                        styles={customStyles}
+                        placeholder= "Size"
+                      />
+                </div>
+                )}
               <div className='flex items-center gap-6'>
                 <p>Quantity:</p>
               <div className="flex items-center mb-6 mt-6 justify-between">
                  <button onClick={decrement} className={`${numOfCopies == 1 ? "opacity-30": "opacity-100"} border border-primary-txt border-opacity-50 hover:border-opacity-0  rounded-full px-2 py-2 hover:bg-primary-txt hover:bg-opacity-30 focus:outline-none`}>
                    <FiMinus />
                  </button>
-                 <span className="mx-4 text-gray-600">{numOfCopies}</span>
+                 <span className="mx-4 text-gray-600 w-2">{numOfCopies}</span>
                  <button onClick={increment} className="border border-primary-txt border-opacity-50 hover:border-opacity-0  rounded-full px-2 py-2 hover:bg-primary-txt hover:bg-opacity-30 focus:outline-none">
                    <FiPlus />
                  </button>
@@ -73,7 +122,7 @@ function BooksDisplay({ books }) {
                <div className='flex items-center justify-between gap-2'>
                <button
                 onClick={handleBuyBook}
-                className="bg-primary-txt text-white px-14 py-2 rounded-md hover:bg-opacity-80"
+                className="bg-primary-txt text-white px-14 py-2 rounded-md hover:bg-opacity-80 text-nowrap"
                 disabled={selectedBook.availability < numOfCopies}
               >
                 Buy Now
@@ -91,7 +140,7 @@ function BooksDisplay({ books }) {
         </div>
         </div>
       )}
-      <h2 className="text-2xl font-semibold text-primary-txt pl-6">Highlights Book</h2>
+      <h2 className="text-2xl font-semibold text-primary-txt pl-6 mt-10">Highlights Book</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 p-6">
         {books.map((book) => (
           <div

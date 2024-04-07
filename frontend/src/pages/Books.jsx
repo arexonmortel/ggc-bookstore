@@ -36,7 +36,7 @@ const refreshPage = () => {
     <div className="flex flex-col min-h-screen">
       <Suspense fallback={<Spinner />}>
         <LazyNavigation />
-        <div className='pt-12'>
+        <div className='mt-3'>
           <Search />
         </div>
         <div className="flex-grow w-full mb-32">
