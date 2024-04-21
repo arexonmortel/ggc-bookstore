@@ -2,7 +2,7 @@ import { FaSearch } from 'react-icons/fa';
 import { useState, useRef, useEffect } from 'react';
 import Select from 'react-select';
 
-function Search() {
+function Search({ onSearchTermChange }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState('');
   const prevSearchTerm = useRef('');
@@ -14,6 +14,9 @@ function Search() {
     prevSearchTerm.current = searchTerm;
     let resultPlaceholder = searchTerm ? `results for "${searchTerm}"` : '';
     setSearchResults(resultPlaceholder);
+
+    // Pass the searchTerm value to the parent component
+    onSearchTermChange(searchTerm);
   };
 
   useEffect(() => {
@@ -65,7 +68,7 @@ function Search() {
           options={options}
           onChange={handleSelectChange}
           styles={customStyles}
-          placeholder = "Select Company"
+          placeholder="Select Company"
         />
         <div className="relative">
           <input

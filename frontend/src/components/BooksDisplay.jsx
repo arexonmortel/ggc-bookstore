@@ -87,14 +87,14 @@ function BooksDisplay({ books }) {
             <div className="flex flex-col justify-center">
               <p className={`text-white px-2 w-max rounded-xl text-sm mb-2 ${selectedBook.availability ? 'bg-green-500': 'bg-red-500'}`}>{selectedBook.availability ? "Available": "Out of stock"}</p>
               <h3 className="text-2xl text-primary-txt font-semibold mb-6">{selectedBook.title}</h3>
-              <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Author:</span> {selectedBook.author}</p>
-              <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Published:</span> {selectedBook.pubYear}</p>
-              <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Genre:</span> {selectedBook.genre}</p>
-              <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Approved:</span> {selectedBook.approvedBy}</p>
-              <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Education Level:</span> {selectedBook.eduLevel}</p>
-              <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Size:</span> {selectedBook.bookSize}</p>
-              <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Pages:</span> {selectedBook.pages}</p>
-              <p className="text-primary-txt font-light mb-2"><span className='font-semibold mr-2'>Stocks left:</span> {selectedBook.availability}</p>
+              <p className="text-primary-txt font-light mb-1"><span className='font-semibold mr-2'>Author:</span> {selectedBook.author}</p>
+              <p className="text-primary-txt font-light mb-1"><span className='font-semibold mr-2'>Published:</span> {selectedBook.pubYear}</p>
+              <p className="text-primary-txt font-light mb-1"><span className='font-semibold mr-2'>Genre:</span> {selectedBook.genre}</p>
+              <p className="text-primary-txt font-light mb-1"><span className='font-semibold mr-2'>Approved:</span> {selectedBook.approvedBy}</p>
+              <p className="text-primary-txt font-light mb-1"><span className='font-semibold mr-2'>Education Level:</span> {selectedBook.eduLevel}</p>
+              <p className="text-primary-txt font-light mb-1"><span className='font-semibold mr-2'>Size:</span> {selectedBook.bookSize}</p>
+              <p className="text-primary-txt font-light mb-1"><span className='font-semibold mr-2'>Pages:</span> {selectedBook.pages}</p>
+              <p className="text-primary-txt font-light mb-1"><span className='font-semibold mr-2'>Stocks left:</span> {selectedBook.availability}</p>
               {selectedBook.publisher.toLowerCase() === "merryland publishing corp." && (
                 <div className='flex items-center gap-2 '>
                       <p className='text-primary-txt font-semibold'>Select Size:</p>
@@ -108,7 +108,7 @@ function BooksDisplay({ books }) {
                 </div>
                 )}
               <div className='flex items-center gap-6'>
-                <p>Quantity:</p>
+                <p className='font-semibold text-primary-txt'>Quantity:</p>
               <div className="flex items-center mb-6 mt-6 justify-between">
                  <button onClick={decrement} className={`${numOfCopies == 1 ? "opacity-30": "opacity-100"} border border-primary-txt border-opacity-50 hover:border-opacity-0  rounded-full px-2 py-2 hover:bg-primary-txt hover:bg-opacity-30 focus:outline-none`}>
                    <FiMinus />
@@ -129,7 +129,7 @@ function BooksDisplay({ books }) {
               </button>
               <button
                 onClick={handleBuyBook}
-                className="bg-[#002366] text-white px-16 py-2 rounded-md hover:bg-opacity-80"
+                className=" text-primary-txt border-primary-txt border hover:bg-white hover:border-primary-txt px-16 py-2 rounded-md hover:bg-opacity-80"
                 disabled={selectedBook.availability < numOfCopies}
               >
                 Inquire
@@ -140,7 +140,7 @@ function BooksDisplay({ books }) {
         </div>
         </div>
       )}
-      <h2 className="text-2xl font-semibold text-primary-txt pl-6 mt-10">Highlights Book</h2>
+      <h2 className="text-2xl font-semibold text-primary-txt pl-6 mt-10">Collection</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 p-6">
         {books.map((book) => (
           <div

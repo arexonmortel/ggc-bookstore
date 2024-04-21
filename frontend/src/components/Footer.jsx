@@ -49,12 +49,12 @@ function Footer() {
             </div>
             <div className='w-full p-5'>
                 <h1 className='py-3 font-bold'>Location</h1>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.390803628679!2d120.98744132487232!3d14.576793485906773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c986251735c9%3A0xa62f9fdd244c900!2sPhilippine%20Christian%20University!5e0!3m2!1sen!2sph!4v1711873081098!5m2!1sen!2sph" 
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.3251688973864!2d121.01861426083818!3d14.5805380775084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c84c009de5ff%3A0x4149353da0e4f4e5!2sMerryland%20Publishing%20Inc.!5e0!3m2!1sen!2sph!4v1713351926231!5m2!1sen!2sph" 
             className='w-full h-60 border-0 rounded-md '
             allowFullScreen="" 
             loading="lazy" >
             </iframe>
-            <p className='text-md font-semibold pt-2'>1000 Pedro Gil St, Ermita, Manila</p>
+            <p className='text-md font-semibold pt-2'>#51 Merryland Village, 375 J. Rizal St. Barangay Namayan, Mandaluyong City</p>
             <p className='font-light'>Metro Manila, Philippines</p>
             </div>
         </div>
