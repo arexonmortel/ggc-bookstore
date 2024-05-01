@@ -17,7 +17,7 @@ function Office(){
   </div>
   <div className="flex items-center">
     <FaLocationDot className="text-primary-txt mr-2"/>
-    <p className="text-gray-700 font-semibold">#51 Merryland Village, 375 J. Rizal St. Barangay Namayan, Mandaluyong City</p>
+    <p className="text-gray-700 font-semibold">#51 Merryland Village, 375 J. Rizal St. Barangay Namayan, Mandaluyong City`</p>
   </div>
 </div>
     )

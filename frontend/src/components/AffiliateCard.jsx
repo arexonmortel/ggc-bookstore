@@ -3,7 +3,7 @@ import React from 'react';
 import {NavLink } from 'react-router-dom';
 import B2g2 from '../assets/b2g2-logo.png';
 import MpcRed from '../assets/mpc-red.png';
-import MpcBlack from '../assets/mpc-black.png';
+import Jedigar from '../assets/jedigar.png';
 import { MdMenuBook } from "react-icons/md";
 function Affiliate() {
       // Array of image paths
@@ -18,7 +18,7 @@ function Affiliate() {
     bookCopies: '100'
   },
   {
-    image: MpcBlack,
+    image: Jedigar,
     name: 'Jedigar Enterprises',
     bookCopies: '60'
   
