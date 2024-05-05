@@ -10,17 +10,20 @@ function Affiliate() {
   const affiliates = [{
     image: B2g2,
     name: 'B2G2 Enterprises',
-    bookCopies: '90'
+    bookCopies: '90',
+    route: 'merryland'
   },
   {
     image: MpcRed,
     name: 'Merryland Publishing Corporation',
-    bookCopies: '100'
+    bookCopies: '100',
+    route: 'jedigar'
   },
   {
     image: Jedigar,
     name: 'Jedigar Enterprises',
-    bookCopies: '60'
+    bookCopies: '60',
+    route: 'b2g2'
   
   }];
 
@@ -30,7 +33,10 @@ function Affiliate() {
       <div className="grid grid-cols-3 gap-4 p-12 pt-6">
       {/* Map over the affiliates array and display each image */}
       {affiliates.map((affiliate, index) => (
-        <NavLink to= {'/books'} key={index}  className=' drop-shadow-md bg-white rounded-3xl overflow-hidden p-5 cursor-pointer'>
+        <NavLink to= {`/about/${affiliate.route}`} 
+        key={index}  
+        className=' drop-shadow-md bg-white rounded-3xl overflow-hidden p-5 cursor-pointer'
+        onClick={()=> window.scrollTo(0, 0)}>
             <div className='bg-[#f0f0f0] flex h-[90%] flex-col items-center justify-center rounded-2xl '>
             <img  src={affiliate.image} alt={`Image ${index + 1}`} className="w-[70%] h-[70%] " />
             </div>

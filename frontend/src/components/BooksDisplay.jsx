@@ -82,7 +82,7 @@ function BooksDisplay({ books }) {
           <div className="flex flex-col items-center justify-center">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 p-6 rounded-3xl mt-8">
           <div className="flex justify-center items-center ">
-              <img src={selectedBook.imageSrc} alt={selectedBook.title} className="w-64 h-80 object-cover rounded-lg shadow-2xl drop-shadow-2xl" />
+              <img src={selectedBook.imageUrl} alt={selectedBook.title} className="w-64 h-80 object-cover rounded-lg shadow-2xl drop-shadow-2xl" />
             </div>
             <div className="flex flex-col justify-center">
               <p className={`text-white px-2 w-max rounded-xl text-sm mb-2 ${selectedBook.availability ? 'bg-green-500': 'bg-red-500'}`}>{selectedBook.availability ? "Available": "Out of stock"}</p>
@@ -149,7 +149,7 @@ function BooksDisplay({ books }) {
             onClick={() => {handleBookClick(book); handleClickTop()}}
           >
             <div className="flex justify-center items-center pt-5">
-              <img src={book.imageSrc} alt={book.title} className="w-44 h-56 object-cover rounded-lg" />
+              <img src={book.imageUrl} alt={book.title} className="w-44 h-56 object-cover rounded-lg" />
             </div>
             <div className="p-4 flex flex-col items-center justify-center  text-center">
               <h3 className="text-lg text-primary-txt font-semibold mb-1">{book.title}</h3>

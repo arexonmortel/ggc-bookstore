@@ -130,7 +130,7 @@ const handleClickTop= () =>{
               handleClickTop();
             }}
           >
-            <NavLink to="/about/Jedigar" activeClassName ="sub-active" className="text-primary-txt font-light font-sm py-3">
+            <NavLink to="/about/jedigar" activeClassName ="sub-active" className="text-primary-txt font-light font-sm py-3">
               Jedigar Enterprises
             </NavLink>
           </li>

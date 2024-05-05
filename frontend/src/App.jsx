@@ -35,18 +35,11 @@ function App() {
       axios
         .get('http://localhost:5555/books')
         .then((response) => {
-          const booksWithBase64Images = response.data.data.map((book) => {
-            const blob = new Blob([new Uint8Array(book.image.data.data)], { type: 'image/png' });
-            const reader = new FileReader();
-            reader.readAsDataURL(blob);
-            reader.onloadend = () => {
-              const updatedBook = { ...book, imageSrc: reader.result }; // Create a new book object with updated imageSrc
-              setBooks((prevBooks) => [...prevBooks, updatedBook]); // Update books state with the new book
-            };
-            return book;
-          });
-          // Cache the data
-          cachedData.current = books;
+          const books = response.data.data
+              setBooks(books);
+              cachedData.current = books; // Cache data
+             /*  console.log(Array.isArray(books))
+              console.log(books) */
         })
         .catch((error) => {
           console.error('Error fetching books:', error);
