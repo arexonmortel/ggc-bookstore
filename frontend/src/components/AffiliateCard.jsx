@@ -10,19 +10,19 @@ function Affiliate() {
   const affiliates = [{
     image: B2g2,
     name: 'B2G2 Enterprises',
-    bookCopies: '90',
+    bookCopies: '37',
     route: 'merryland'
   },
   {
     image: MpcRed,
     name: 'Merryland Publishing Corporation',
-    bookCopies: '100',
+    bookCopies: '37',
     route: 'jedigar'
   },
   {
     image: Jedigar,
     name: 'Jedigar Enterprises',
-    bookCopies: '60',
+    bookCopies: '19',
     route: 'b2g2'
   
   }];
