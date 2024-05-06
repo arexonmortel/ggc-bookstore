@@ -1,7 +1,6 @@
-import React, { Suspense, lazy,  useEffect, useState, useRef } from 'react';
+import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Spinner from './components/Spinner';
-import axios from 'axios';
 import './index.css'
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
@@ -17,39 +16,7 @@ const LazyAboutJedigar = lazy(() => import('./pages/about/AboutJedigar'));
 const LazyAboutB2g2 = lazy(() => import('./pages/about/AboutB2g2'));
 
 function App() {
-  const [books, setBooks] = useState([]);
-  const isMounted = useRef(false); // useRef to track component mount state
-  const cachedData = useRef([]); // useRef to store cached data
 
-  useEffect(() => {
-    isMounted.current = true; // Component mounted
-
-    if (!isMounted.current) return; // Prevent fetching data if component is unmounted
-
-    
-    // Check if data is already cached
-    if (cachedData.current.length > 0) {
-      setBooks(cachedData.current);
-      
-    } else {
-      axios
-        .get('http://localhost:5555/books')
-        .then((response) => {
-          const books = response.data.data
-              setBooks(books);
-              cachedData.current = books; // Cache data
-             /*  console.log(Array.isArray(books))
-              console.log(books) */
-        })
-        .catch((error) => {
-          console.error('Error fetching books:', error);
-        })
-    }
-
-    return () => {
-      isMounted.current = false; // Component will unmount
-    };
-  }, []); // Empty dependency array to run only on component mount
 
   return (
     <div>
@@ -64,7 +31,7 @@ function App() {
       }>
         <Routes>
           <Route path='/' element={<LazyHome />} />
-          <Route path='/books' element={<LazyBooks books = {books} />} />
+          <Route path='/books' element={<LazyBooks />} />
           <Route path='/affiliate' element={<LazyAffiliate />} />
           <Route path='/contact' element={<LazyContact />} />
           <Route path='/about/merryland' element={<LazyAboutMerryland />} />

@@ -1,13 +1,15 @@
 import { FaSearch } from 'react-icons/fa';
 import { useState, useRef, useEffect } from 'react';
 import Select from 'react-select';
+import axios from 'axios';
 
-function Search({ onSearchTermChange }) {
+function Search( { onSearch, onBooksFound }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState('');
   const prevSearchTerm = useRef('');
+  const [loading, setLoading] = useState(false);
 
-  // Define handleSearch function outside useEffect
+/*   // Define handleSearch function outside useEffect
   const handleSearch = () => {
     console.log('Previous value:', prevSearchTerm.current);
     console.log('Current value:', searchTerm);
@@ -17,6 +19,26 @@ function Search({ onSearchTermChange }) {
 
     // Pass the searchTerm value to the parent component
     onSearchTermChange(searchTerm);
+  }; */
+
+  const handleSearch = async () => {
+    setLoading(true);
+    console.log('Previous value:', prevSearchTerm.current);
+    console.log('Current value:', searchTerm);
+    prevSearchTerm.current = searchTerm;
+    try {
+      const response = await axios.get('http://localhost:5555/books/search', {
+        params: { q: searchTerm }
+      });
+      console.log("search results: ", response.data)
+      onSearch(response.data.data);
+      onBooksFound(true); // Indicate that books were found
+    } catch (error) {
+      onBooksFound(false); // Indicate that no books were found
+      console.error('Error searching:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -60,6 +82,7 @@ function Search({ onSearchTermChange }) {
   };
 
   return (
+    <form  onSubmit={(e) => { e.preventDefault(); handleSearchClick(); }} >
     <div className='flex px-32'>
       <div className="flex items-center space-x-4 ml-auto">
         <p className="text-primary-txt text-opacity-95">Filter by:</p>
@@ -77,13 +100,17 @@ function Search({ onSearchTermChange }) {
             placeholder={searchResults || "Search for books"}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <FaSearch
+          <button
+          type='submit'>
+            <FaSearch
             className="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary-txt text-xl cursor-pointer"
             onClick={handleSearchClick}
           />
+          </button>
         </div>
       </div>
     </div>
+    </form>
   );
 }
 

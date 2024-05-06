@@ -1,42 +1,68 @@
-import React, { Suspense, lazy, useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect, useState, useRef } from 'react';
 import Spinner from '../components/Spinner';
 import BooksDisplay from '../components/BooksDisplay';
 import Search from '../components/Search';
+import axios from 'axios';
+
+
 
 // Lazy load the Navigation component
 const LazyNavigation = lazy(() => import("../components/Navigation"));
 // Lazy load the Footer component
 const LazyFooter = lazy(() => import("../components/Footer"));
 
-function Books({ books }) {
+function Books() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filteredBooks, setFilteredBooks] = useState(books);
+  const [books, setBooks] = useState([]);
+  const [booksFound, setBooksFound] = useState(true);
+  const isMounted = useRef(false); // useRef to track component mount state
+  const cachedData = useRef([]); // useRef to store cached data
 
-  // Function to handle search term change
+/*   // Function to handle search term change
   const handleSearchTermChange = (term) => {
     setSearchTerm(term);
-  };
+  }; */
 
-  useEffect(() => {
-    console.log(filteredBooks)
-    setLoading(books.length === 0);
-    // Filter books based on search term
-    const filtered = books.filter(book =>
-      book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      book.genre.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredBooks(filtered);
-    const timeout = setTimeout(() => {
-      if (loading) {
-        setError(true);
-        setLoading(false);
-      }
-    }, 120000); // 2 minutes
-    return () => clearTimeout(timeout);
-  }, [books, loading, searchTerm]);
+
+  useEffect( () => {
+    isMounted.current = true; // Component mounted
+
+    if (!isMounted.current) return; // Prevent fetching data if component is unmounted
+    
+    // Check if data is already cached
+    if (cachedData.current.length > 0) {
+      setBooks(cachedData.current);
+      
+    } else {
+     axios
+        .get('http://localhost:5555/books')
+        .then((response) => {
+          const books = response.data.data
+              setBooks(books);
+              cachedData.current = books; // Cache data
+             /*  console.log(Array.isArray(books))
+              console.log(books) */
+              setLoading(false)
+        })
+        .catch((error) => {
+          setError(true);
+          setLoading(false);
+          console.error('Error fetching books:', error);
+        })
+    }
+
+    return () => {
+      isMounted.current = false; // Component will unmount
+    };
+  }, []); // Empty dependency array to run only on component mount
+
+  
+  const handleSearch = async (searchResults) => {
+    // Update the state variable directly without logging it
+    setBooks(searchResults);
+  };
+  
 
   const refreshPage = () => {
     window.location.reload();
@@ -47,7 +73,7 @@ function Books({ books }) {
       <Suspense fallback={<Spinner />}>
         <LazyNavigation />
         <div className='mt-3'>
-          <Search onSearchTermChange={handleSearchTermChange} />
+          <Search onSearch={handleSearch} onBooksFound={setBooksFound} />
         </div>
         <div className="flex-grow w-full mb-32">
           {error ? (
@@ -59,7 +85,11 @@ function Books({ books }) {
             </div>
           ) : loading ? (
             <Spinner />
-          ) : (
+          ) : ( !booksFound ? (
+            <div className='mt-6'>
+        <h1 className='opacity-80 text-center mt-24'>No Books Found...</h1>
+      </div>
+          ):
             <div>
               <BooksDisplay books={books} />
             </div>
