@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FiPlus, FiMinus,  FiX  } from 'react-icons/fi'; 
 import Select from 'react-select';
+import { useSpring, animated } from '@react-spring/web'
 
 function BooksDisplay({ books }) {
   const [selectedBook, setSelectedBook] = useState(null);
@@ -8,6 +9,13 @@ function BooksDisplay({ books }) {
   const [bookSize, setBookSize] = useState('');
 
 
+  const animatedBooks = useSpring({
+    from: { y: 50, opacity:0 },
+    to: { y: 0, opacity:1},
+    config: { duration: 700 },
+    delay: 500,
+  
+  })
   const handleBookClick = (book) => {
     setSelectedBook(book);
     setNumOfCopies(1)
@@ -141,6 +149,7 @@ function BooksDisplay({ books }) {
         </div>
       )}
       <h2 className="text-2xl font-semibold text-primary-txt pl-6 mt-10">Collection</h2>
+      <animated.div style={{...animatedBooks}}>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 p-6">
         {books.map((book) => (
           <div
@@ -161,6 +170,7 @@ function BooksDisplay({ books }) {
           </div>
         ))}
       </div>
+      </animated.div>
     </div>
   );
 }

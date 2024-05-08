@@ -1,18 +1,24 @@
 
 import React, {Suspense, lazy} from 'react';
 import  Spinner  from '../../components/Spinner';
+import { useSpring, animated } from '@react-spring/web'
 
 
 const LazyNavigation = lazy(()=>import ('../../components/Navigation'));
 const LazyFooter = lazy(()=> import ('../../components/Footer'));
 
 function AboutJedigar() {
+  const springs = useSpring({
+    from: { y: 200, opacity:0 },
+    to: { y: 0, opacity:1},
+    config: { duration: 700 }
+  })
     return (
         <div className="flex flex-col min-h-screen">
   <LazyNavigation />
   <Suspense fallback = {<Spinner/>}>
+  <animated.div style={{...springs}}>
   <div className="flex-grow"> {/* This div expands to fill remaining vertical space */}
- 
   <div className="container mx-auto py-12 p-20 text-primary-txt">
       <div className="text-center">
         <h1 className="text-2xl font-bold mb-4">Jedigar Enterprises, Inc.</h1>
@@ -44,6 +50,7 @@ function AboutJedigar() {
     </div>
 
   </div>
+  </animated.div>
     <LazyFooter/>
   </Suspense>
 </div>

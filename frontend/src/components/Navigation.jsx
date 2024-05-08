@@ -102,11 +102,18 @@ const handleClickTop= () =>{
                 Home
               </NavLink>
             </li>
+            <li className=" p-3 hover:underline underline-offset-4 decoration-[#9090a3]" onClick={handleClickTop}>
+              <NavLink activeClassName = "active" to="/aboutggc"
+              className="text-primary-txt font-medium text-lg p-7 "
+              onClick={handleClick}>
+                About
+              </NavLink>
+            </li>
             <li
       className="relative p-7 hover:underline underline-offset-4 decoration-[#9090a3] text-primary-txt font-medium text-lg focus:outline-none cursor-pointer"
       onClick={toggleAbout}
     >
-        About
+      Subsidiary
       {isOpenAbout && (
         <ul
           className="absolute mt-2 bg-white rounded-xl w-52 shadow-md ml-[-5rem] overflow-hidden z-50"
@@ -182,13 +189,13 @@ const handleClickTop= () =>{
                 Contact Us
               </NavLink>
             </li>
-            <NavLink
+{/*             <NavLink
                   to="/"
                   className="text-primary-txt font-medium text-lg"
 
                 >
                   <IoPerson className="text-primary-txt font-medium text-xl" />
-                </NavLink>
+                </NavLink> */}
           </ul>
         </div>
 

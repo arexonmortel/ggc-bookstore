@@ -3,6 +3,7 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import Spinner from '../components/Spinner';
 
+
 // Lazy load the Hero component
 const LazyHero = lazy(() => import('../components/Hero'));
 // Lazy load the Affiliate component

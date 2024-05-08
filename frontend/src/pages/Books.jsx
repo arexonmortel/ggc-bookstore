@@ -3,6 +3,7 @@ import Spinner from '../components/Spinner';
 import BooksDisplay from '../components/BooksDisplay';
 import Search from '../components/Search';
 import axios from 'axios';
+import { useSpring, animated } from '@react-spring/web'
 
 
 
@@ -90,11 +91,11 @@ function Books() {
         <h1 className='opacity-80 text-center mt-24'>No Books Found...</h1>
       </div>
           ):
-            <div>
               <BooksDisplay books={books} />
-            </div>
+          
           )}
         </div>
+       
         <LazyFooter />
       </Suspense>
     </div>

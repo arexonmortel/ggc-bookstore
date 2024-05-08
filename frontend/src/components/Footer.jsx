@@ -43,6 +43,7 @@ function Footer() {
                 <h1 className='font-semibold text-xl py-8'>Quick Links</h1>
                 <ul className='flex flex-col gap-2 text-md'>
                     <li className='cursor-pointer hover:underline underline-offset-1' onClick={handleClickTop}><NavLink to='/'>Home</NavLink></li>
+                    <li className='cursor-pointer hover:underline underline-offset-1' onClick={handleClickTop}><NavLink to='/aboutggc'>About</NavLink></li>
                     <li className='cursor-pointer hover:underline underline-offset-1' onClick={handleClickTop}><NavLink to='/books'>Explore Books</NavLink></li>
                     <li className='cursor-pointer hover:underline underline-offset-1' onClick={handleClickTop}><NavLink to='/contact'>Contact Us</NavLink></li>
                 </ul>

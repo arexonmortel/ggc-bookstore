@@ -11,19 +11,19 @@ function Affiliate() {
     image: B2g2,
     name: 'B2G2 Enterprises',
     bookCopies: '37',
-    route: 'merryland'
+    route: 'b2g2'
   },
   {
     image: MpcRed,
     name: 'Merryland Publishing Corporation',
     bookCopies: '37',
-    route: 'jedigar'
+    route: 'merryland'
   },
   {
     image: Jedigar,
     name: 'Jedigar Enterprises',
     bookCopies: '19',
-    route: 'b2g2'
+    route: 'jedigar'
   
   }];
 

@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 // Lazy load route components
 const LazyHome = lazy(() => import('./pages/Home'));
 const LazyBooks = lazy(() => import('./pages/Books'));
-const LazyAffiliate = lazy(() => import('./pages/Affiliate'));
+const LazyAbout = lazy(() => import('./pages/About'));
 const LazyContact = lazy(() => import('./pages/Contact'));
 const LazyAboutMerryland = lazy(() => import('./pages/about/AboutMerryland'));
 const LazyAboutJedigar = lazy(() => import('./pages/about/AboutJedigar'));
@@ -32,7 +32,7 @@ function App() {
         <Routes>
           <Route path='/' element={<LazyHome />} />
           <Route path='/books' element={<LazyBooks />} />
-          <Route path='/affiliate' element={<LazyAffiliate />} />
+          <Route path='/aboutggc' element={<LazyAbout />} />
           <Route path='/contact' element={<LazyContact />} />
           <Route path='/about/merryland' element={<LazyAboutMerryland />} />
           <Route path='/about/jedigar' element={<LazyAboutJedigar />} />

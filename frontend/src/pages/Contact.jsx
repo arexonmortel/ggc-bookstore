@@ -2,6 +2,8 @@ import React, { Suspense, lazy } from 'react';
 import Spinner from '../components/Spinner';
 import Form from '../components/Form';
 import SideCover from '../components/SideCover';
+import { useSpring, animated } from '@react-spring/web'
+
 
 // Lazy load the Navigation component
 const LazyNavigation = lazy(() => import("../components/Navigation"));
@@ -9,18 +11,30 @@ const LazyNavigation = lazy(() => import("../components/Navigation"));
 const LazyFooter = lazy(() => import("../components/Footer"));
 
 function Contact() {
+  const animatedSideCover = useSpring({
+    from: { y: -200, opacity:0 },
+    to: { y: 0, opacity:1},
+    config: { duration: 700 },
+  
+  })
+  const animatedForm = useSpring({
+    from: { y: 200, opacity:0 },
+    to: { y: 0, opacity:1},
+    config: { duration: 700 },
+  
+  })
   return (
     <div className="flex flex-col min-h-screen">
       <Suspense fallback={<Spinner />}>
         <LazyNavigation />
         <div className="flex-grow">
         <div className="container mx-auto flex flex-wrap py-12 px-32">
-  <div className="w-3/5 pr-4 "> {/* 60% width */}
+  <animated.div style={{...animatedSideCover}} className="w-3/5 pr-4 "> {/* 60% width */}
     <SideCover />
-  </div>
-  <div className="w-2/5 "> {/* 40% width */}
+  </animated.div>
+  <animated.div style={{...animatedForm}} className="w-2/5 "> {/* 40% width */}
     <Form />
-  </div>
+  </animated.div>
 </div>
         </div>
         <LazyFooter />

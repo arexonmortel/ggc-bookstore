@@ -1,6 +1,6 @@
 import rectangle from '../assets/rectangle-oval.svg'
 import circle from '../assets/circle.svg'
-import girl from '../assets/girl.svg'
+import girl from '../assets/girl.png'
 
 function SideCover () {
     return (
@@ -19,7 +19,7 @@ function SideCover () {
                 {/* Circle image */}
                 <img src={circle} alt="circle" className=" w-[26rem] absolute top-[70%] left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                 {/* Girl image */}
-                <img src={girl} alt="girl" className=" w-80 absolute bottom-0 left-1/2 transform -translate-x-1/2" />
+                <img src={girl} alt="girl" className=" w-96 absolute bottom-0 left-1/2 transform -translate-x-36 -translate-y-14" />
         </div>
     )
 }
