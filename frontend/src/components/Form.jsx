@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
 import Office from './Office';
-import config from '../config'
+import configs from '../config'
 import { useSpring, animated } from 'react-spring';
 
 const Form = () => {
@@ -26,7 +26,7 @@ const Form = () => {
      
     e.preventDefault();
 
-    const {serviceId, templateId, userId} = config;
+    const {serviceId, templateId, userId} = configs.configContact;
     emailjs.sendForm(serviceId, templateId, e.target, userId)
       .then((result) => {
         console.log('Email sent successfully:', result.text);

@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import Spinner from '../components/Spinner';
-
+import Hero from '../components/Hero'
 
 // Lazy load the Hero component
 const LazyHero = lazy(() => import('../components/Hero'));
@@ -15,7 +15,7 @@ function Home() {
       <Suspense fallback={<Spinner />}>
         <Navigation />
         <div className="flex-grow">
-          <LazyHero />
+          <Hero />
           <LazyAffiliate />
         </div>
         <Footer />

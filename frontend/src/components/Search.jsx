@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
 
-function Search( { onSearch, onBooksFound }) {
+function Search( { onSearch, onBooksFound, sendSearchTerm }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState('');
   const prevSearchTerm = useRef('');
@@ -23,31 +23,34 @@ function Search( { onSearch, onBooksFound }) {
 
   const handleSearch = async () => {
     setLoading(true);
-    console.log('Previous value:', prevSearchTerm.current);
-    console.log('Current value:', searchTerm);
+    //console.log('Previous value:', prevSearchTerm.current);
+   // console.log('Current value:', searchTerm);
     prevSearchTerm.current = searchTerm;
+    sendSearchTerm(searchTerm)
+    
     try {
       const response = await axios.get('http://localhost:5555/books/search', {
         params: { q: searchTerm }
       });
-      console.log("search results: ", response.data)
+      //console.log("search results: ", response.data)
       onSearch(response.data.data);
       onBooksFound(true); // Indicate that books were found
     } catch (error) {
       onBooksFound(false); // Indicate that no books were found
-      console.error('Error searching:', error);
+      //console.error('Error searching:', error);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    console.log("Current search term:", searchTerm);
+    //console.log("Current search term:", searchTerm);
     handleSearch(); // Call handleSearch when searchTerm changes
   }, [searchTerm]);
 
   const handleSelectChange = (selectedOption) => {
     setSearchTerm(selectedOption.value);
+    selectedBook(null)
   };
 
   const handleSearchClick = () => {
@@ -85,7 +88,7 @@ function Search( { onSearch, onBooksFound }) {
     <form  onSubmit={(e) => { e.preventDefault(); handleSearchClick(); }} >
     <div className='flex px-32'>
       <div className="flex items-center space-x-4 ml-auto">
-        <p className="text-primary-txt text-opacity-95">Filter by:</p>
+        <p className="text-primary-txt text-opacity-95">Filter by Company:</p>
         <Select
           className="rounded-lg p-2 py-3 outline-none"
           options={options}

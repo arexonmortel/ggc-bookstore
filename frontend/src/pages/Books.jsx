@@ -1,10 +1,8 @@
-import { Suspense, lazy, useEffect, useState, useRef } from 'react';
-import Spinner from '../components/Spinner';
+import axios from 'axios';
+import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import BooksDisplay from '../components/BooksDisplay';
 import Search from '../components/Search';
-import axios from 'axios';
-import { useSpring, animated } from '@react-spring/web'
-
+import Spinner from '../components/Spinner';
 
 
 // Lazy load the Navigation component
@@ -14,6 +12,7 @@ const LazyFooter = lazy(() => import("../components/Footer"));
 
 function Books() {
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState(false);
   const [books, setBooks] = useState([]);
   const [booksFound, setBooksFound] = useState(true);
@@ -25,7 +24,6 @@ function Books() {
     setSearchTerm(term);
   }; */
 
-
   useEffect( () => {
     isMounted.current = true; // Component mounted
 
@@ -34,6 +32,7 @@ function Books() {
     // Check if data is already cached
     if (cachedData.current.length > 0) {
       setBooks(cachedData.current);
+  
       
     } else {
      axios
@@ -62,7 +61,13 @@ function Books() {
   const handleSearch = async (searchResults) => {
     // Update the state variable directly without logging it
     setBooks(searchResults);
+
+    
   };
+  const  handleSearchTerm = async (searchTerm)=>{
+    setSearchTerm(searchTerm)
+    //console.log("Book Page Search Term: ", searchTerm)
+  }
   
 
   const refreshPage = () => {
@@ -74,7 +79,7 @@ function Books() {
       <Suspense fallback={<Spinner />}>
         <LazyNavigation />
         <div className='mt-3'>
-          <Search onSearch={handleSearch} onBooksFound={setBooksFound} />
+          <Search onSearch={handleSearch} onBooksFound={setBooksFound} sendSearchTerm ={handleSearchTerm}/>
         </div>
         <div className="flex-grow w-full mb-32">
           {error ? (
@@ -91,7 +96,7 @@ function Books() {
         <h1 className='opacity-80 text-center mt-24'>No Books Found...</h1>
       </div>
           ):
-              <BooksDisplay books={books} />
+              <BooksDisplay books={books} searchTerm ={searchTerm}/>
           
           )}
         </div>

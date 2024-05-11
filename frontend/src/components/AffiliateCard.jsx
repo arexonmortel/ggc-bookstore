@@ -28,14 +28,14 @@ function Affiliate() {
   }];
 
   return (
-    <div className='w-full h-full pb-32 drop-shadow-lg' >
-      <h1 className="text-primary-txt text-3xl font-bold font-primary mt-20 ml-14">Affiliates</h1>
+    <div className='w-full h-full pb-32 drop-shadow-lg '  >
+      <h1 className="text-primary-txt text-3xl font-bold font-primary mt-20 ml-14 p-3">Affiliates</h1>
       <div className="grid grid-cols-3 gap-4 p-12 pt-6">
       {/* Map over the affiliates array and display each image */}
       {affiliates.map((affiliate, index) => (
         <NavLink to= {`/about/${affiliate.route}`} 
         key={index}  
-        className=' drop-shadow-md bg-white rounded-3xl overflow-hidden p-5 cursor-pointer'
+        className=' drop-shadow-md bg-white rounded-3xl overflow-hidden p-5 cursor-pointer transition-transform duration-500 transform hover:-translate-y-10 '
         onClick={()=> window.scrollTo(0, 0)}>
             <div className='bg-[#f0f0f0] flex h-[90%] flex-col items-center justify-center rounded-2xl '>
             <img  src={affiliate.image} alt={`Image ${index + 1}`} className="w-[70%] h-[70%] " />

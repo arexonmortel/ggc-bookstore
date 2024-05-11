@@ -60,7 +60,7 @@ function Footer() {
             </div>
         </div>
         </div>
-        <p className="text-center font-extralight text-sm text-gray-400">© {currentYear} Garcia Group of Company. All Rights Reserved.</p>
+        <p className="text-center font-extralight text-sm text-gray-400">© 2024 Garcia Group of Company. All Rights Reserved.</p>
         </footer>
     );
 }
