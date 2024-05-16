@@ -4,6 +4,7 @@ import { FiMinus, FiPlus, FiX } from 'react-icons/fi';
 import { MdOutgoingMail } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
 import { useSpring, animated } from '@react-spring/web'
+import { CgUnavailable } from "react-icons/cg";
 import emailjs from 'emailjs-com';
 import configs from '../config'
 import axios from 'axios';
@@ -13,12 +14,21 @@ export default function SelectedBookDetails({selectedBook, handleSelectChange, h
     const [showMessage, setShowMessage] = useState(false)
     const [responseMessage, setResponseMessage] = useState('');
     const [isClosing, setIsClosing] = useState(false)
+    const [addToCartHover, setAddToCartHover] = useState(false)
     const image = selectedBook.imageUrl
 
 
     const animatedMessage = useSpring({
       opacity: showMessage ? 1 : 0,
       transform: `translateY(${showMessage ? 0 : -20}px)`,
+      config: {
+        tension: 300, // Adjust the tension for a more springy effect
+        friction: 10 // Adjust the friction for smoother animation
+      }
+    });
+    const animatedComingSoon = useSpring({
+      opacity: addToCartHover ? 1 : 0,
+      transform: `translateX(${addToCartHover ? 0 : -30}px)`,
       config: {
         tension: 300, // Adjust the tension for a more springy effect
         friction: 10 // Adjust the friction for smoother animation
@@ -251,25 +261,50 @@ export default function SelectedBookDetails({selectedBook, handleSelectChange, h
                </div>
                </div> */}
                <div className='flex'> 
-  <button
-    onClick={handleInquire}
-    className="mt-6 inline-flex items-center justify-center gap-2 bg-primary-txt text-white px-4 py-2 rounded-md hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-primary-txt focus:ring-opacity-50"
-  >
-    <span className="text-nowrap">Inquire Now</span>
-    <MdOutgoingMail className='text-2xl' />
-  </button>
+               {selectedBook.availability > 0 ? 
+               (<button
+                onClick={handleInquire}
+                className="mt-6 inline-flex items-center justify-center gap-2 bg-primary-txt text-white px-4 py-2 rounded-md hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-primary-txt focus:ring-opacity-50"
+              >
+                <span className="text-nowrap">Inquire Now</span>
+                <MdOutgoingMail className='text-2xl' />
+              </button>)
+               :
+               (
+               <button
+               disabled
+                className="mt-6 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-primary-txt focus:ring-opacity-50 bg-gray-400 text-gray-700 cursor-not-allowed"
+               >
+                <span className="text-nowrap">Not Available</span>
+                <CgUnavailable className='text-2xl' />
+              </button>
+            )}
 
-  <button
-    onClick={handleAddToCart}
-    className="mt-6 ml-4 inline-flex items-center justify-center gap-2 bg-white text-primary-txt px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-txt focus:ring-opacity-50 border border-primary-txt hover:bg-primary-txt hover:text-white hover:drop-shadow-xl hover:bg-opacity-80"
-  >
-    <span className="text-nowrap">Add to Cart</span>
-    <FaShoppingCart className='text-2xl' />
-  </button>
-</div>
-
- 
-               
+            {selectedBook.availability > 0 ? 
+            (
+              <div className='relative'>
+        {/*       <button
+              onMouseEnter={()=> setAddToCartHover(true)}
+              onMouseLeave={()=> setAddToCartHover(false)}
+              onClick={handleAddToCart}
+              className="mt-6 ml-4 inline-flex items-center justify-center gap-2 bg-white text-primary-txt px-4 py-2 rounded-md  border border-primary-txt hover:bg-primary-txt hover:text-white hover:drop-shadow-xl hover:bg-opacity-80"
+            >
+              <span className="text-nowrap">Add to Cart</span>
+              <FaShoppingCart className='text-2xl' />
+            </button>
+            {
+              addToCartHover ? (
+                <animated.div style ={animatedComingSoon}>
+                <div
+                className="absolute  left-48 bottom-0 text-primary-txt font-medium px-6 py-2 rounded-md bg-opacity-50 bg-gray-300 text-nowrap "
+              >
+                Coming Soon
+              </div>
+              </animated.div>
+              ) :(<></>)
+            } */}
+        </div>):( <></> ) }
+          </div>
             </div>
             </animated.div>
             ) 

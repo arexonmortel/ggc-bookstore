@@ -91,7 +91,7 @@ function About() {
 <div className="flex flex-col min-h-screen">
   <Navigation />
   <div className="flex-grow"> {/* This div expands to fill remaining vertical space */}
-  <div className="container mx-auto relative overflow-hidden">
+  <div className=" mx-auto relative overflow-hidden w-full">
   <div className="relative mb-5">
   <img src={heroAbout} alt="image" className="w-full opacity-100" />
   <div className="absolute flex flex-col justify-center items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center bg-primary-txt opacity-75 w-full h-full">
@@ -158,8 +158,9 @@ function About() {
 
 
         {/* CEO SECTION */}
-         <animated.div style={{...animateCeo}}>
-      <section className="flex justify-center items-center gap-60 px-10 bg-cover bg-center" style={{backgroundImage: `url(${wave})`}}>
+        <div className= "w-full">
+         <animated.div style={{...animateCeo}} >
+      <section className="flex justify-center items-center gap-60 px-10 bg-cover bg-center w-full" style={{backgroundImage: `url(${wave})`}}>
        <div className="w-1/2">
         <h2 className="text-4xl font-bold text-primary-txt mb-5 ml-5 ">Meet Our CEO</h2>
         {/* <h3 className="text-3xl font-semibold text-primary-txt ">John Doe</h3> */}
@@ -174,6 +175,7 @@ function About() {
         </div>
       </section>
       </animated.div>
+      </div>
 
       <animated.div style={{...animateOwners}}>
       <section className=" mb-12 flex flex-col justify-center items-center gap-12 px-10 bg-cover bg-center py-10" style={{backgroundImage: `url(${waveInverted})`}}>
@@ -209,4 +211,3 @@ function About() {
   }
   
   export default About;
-  

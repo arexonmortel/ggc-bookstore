@@ -38,7 +38,7 @@ function Affiliate() {
   return (
     <div className='w-full h-full pb-32 drop-shadow-lg'>
       <h1 className='text-primary-txt text-3xl font-bold font-primary mt-20 ml-14 p-3'>Affiliates</h1>
-      <div className='grid grid-cols-3 gap-4 p-12 pt-6'>
+      <div className='grid grid-cols-3 gap-16 p-12 pt-6'>
         {/* Map over the affiliates array and display each image */}
         {affiliates.map((affiliate, index) => (
           <NavLink
