@@ -80,7 +80,7 @@ export default function SelectedBookDetails({selectedBook, handleSelectChange, h
           .then((result) => {
            // console.log('Email sent successfully:', result.text);
            setShowMessage(true);
-           setResponseMessage('Message sent successfully!');
+           setResponseMessage('Thank you for your inquiry. Will respond to your email as soon as possible.');
             // Clear form data after successful submission
             setFormData({
               bookTitle :'',
@@ -104,12 +104,12 @@ export default function SelectedBookDetails({selectedBook, handleSelectChange, h
             if (response.status === 200) {
               console.log("Inquiry successful")
               setShowMessage(true);
-              setResponseMessage('Message sent successfully!');
+              setResponseMessage('Thank you for your inquiry. Will respond to your email as soon as possible.');
             }
           } catch (error) {
             setTimeout(() => {
               setShowMessage(false);
-            }, 2000);
+            }, 3000);
             console.error('Error sending message:', error);
             setResponseMessage('Failed to send message. Please try again later.');
           }
@@ -121,7 +121,7 @@ export default function SelectedBookDetails({selectedBook, handleSelectChange, h
           timerId = setTimeout(() => {
             handleClose();
             timerId = null; // Reset timerId after it's been executed
-          }, 2200);
+          }, 3200);
       };
       
 
