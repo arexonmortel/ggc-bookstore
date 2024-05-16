@@ -3,6 +3,7 @@ import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import BooksDisplay from '../components/BooksDisplay';
 import Search from '../components/Search';
 import Spinner from '../components/Spinner';
+import Messenger from "../components/Messenger";
 
 
 // Lazy load the Navigation component
@@ -99,11 +100,14 @@ function Books() {
               <BooksDisplay books={books} searchTerm ={searchTerm}/>
           
           )}
+          {/* <Messenger /> */}
         </div>
        
         <LazyFooter />
       </Suspense>
-    </div>
+   
+      
+   </div>
   );
 }
 

@@ -3,6 +3,8 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import Spinner from '../components/Spinner';
 import Hero from '../components/Hero'
+import Messenger from "../components/Messenger";
+
 
 // Lazy load the Hero component
 const LazyHero = lazy(() => import('../components/Hero'));
@@ -17,6 +19,7 @@ function Home() {
         <div className="flex-grow">
           <Hero />
           <LazyAffiliate />
+          <Messenger />
         </div>
         <Footer />
       </Suspense>

@@ -3,6 +3,8 @@ import Spinner from '../components/Spinner';
 import Form from '../components/Form';
 import SideCover from '../components/SideCover';
 import { useSpring, animated } from '@react-spring/web'
+import Messenger from "../components/Messenger";
+
 
 
 // Lazy load the Navigation component
@@ -35,10 +37,12 @@ function Contact() {
   <animated.div style={{...animatedForm}} className="w-2/5 "> {/* 40% width */}
     <Form />
   </animated.div>
+  <Messenger />
 </div>
         </div>
         <LazyFooter />
       </Suspense>
+
     </div>
   );
 }

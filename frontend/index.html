@@ -11,6 +11,40 @@
   </head>
   <body>
     <div id="root"></div>
+
+     <!-- Messenger Chat Plugin Code -->
+     <div id="fb-root"></div>
+     <div id="fb-customer-chat" class="fb-customerchat"
+          page_id="302373696298499"
+          attribution="biz_inbox"
+          theme_color="#0084ff"
+          logged_in_greeting="Hi! How can we help you?"
+          logged_out_greeting="Hi! How can we help you?"
+          greeting_dialog_display="show"
+          greeting_dialog_delay="5">
+     </div>
+     <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "302373696298499");
+      chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v19.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

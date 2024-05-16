@@ -14,6 +14,7 @@ import wave from '../assets/wave.svg'
 import waveInverted from '../assets/wave_inverted.svg'
 import owner1 from '../assets/owner1.jpg'
 import owner2 from '../assets/owner2.jpg'
+import Messenger from "../components/Messenger";
 
 
 
@@ -204,6 +205,7 @@ function About() {
       </animated.div>
     </div>
       
+  <Messenger />
   </div>
   <Footer />
 </div>
