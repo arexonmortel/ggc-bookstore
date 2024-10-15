@@ -6,7 +6,6 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useSpring, animated } from '@react-spring/web'
 import { CgUnavailable } from "react-icons/cg";
 import emailjs from 'emailjs-com';
-import configs from '../config'
 import axios from 'axios';
 
 export default function SelectedBookDetails({selectedBook, handleSelectChange, handleClose}) {
@@ -70,6 +69,14 @@ export default function SelectedBookDetails({selectedBook, handleSelectChange, h
           [name]: value,
         });
       };
+
+        const configs = {
+  configInquire: {
+    serviceId: process.env.REACT_APP_SERVICE_ID_INQUIRE,
+    templateId: process.env.REACT_APP_TEMPLATE_ID_INQUIRE,
+    userId: process.env.REACT_APP_USER_ID_INQUIRE,
+  }
+}
     
       const handleSubmit = async (e) => {
         e.preventDefault();
