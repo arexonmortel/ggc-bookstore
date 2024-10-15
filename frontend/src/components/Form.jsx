@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import emailjs from 'emailjs-com';
 import Office from './Office';
-import configs from '../config'
 import { useSpring, animated } from 'react-spring';
 
 const Form = () => {
+
+  const configs = {
+  configContact: {
+    serviceId: process.env.REACT_APP_SERVICE_ID,
+    templateId: process.env.REACT_APP_TEMPLATE_ID,
+    userId: process.env.REACT_APP_USER_ID,
+  }
+}
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [formData, setFormData] = useState({
     fullname: '',
@@ -26,6 +33,7 @@ const Form = () => {
      
     e.preventDefault();
 
+    
     const {serviceId, templateId, userId} = configs.configContact;
     emailjs.sendForm(serviceId, templateId, e.target, userId)
       .then((result) => {
