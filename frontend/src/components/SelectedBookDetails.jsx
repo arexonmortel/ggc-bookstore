@@ -105,6 +105,10 @@ export default function SelectedBookDetails({selectedBook, handleSelectChange, h
               console.log("Inquiry successful")
               setShowMessage(true);
               setResponseMessage('Thank you for your inquiry. Will respond to your email as soon as possible.');
+            } else {
+              console.error('Failed to send message. Please try again later.');
+              setShowMessage(true);
+              setResponseMessage('Failed to send inquiry. Please try again later.');
             }
           } catch (error) {
             setTimeout(() => {
